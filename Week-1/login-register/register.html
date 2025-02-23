@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Register Page</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Kayıt Ol</h2>
+      <form action="#" method="POST">
+        <label for="name">İsim:</label>
+        <input type="name" name="name" id="name" required />
+
+        <label for="surname">Soyisim:</label>
+        <input type="surname" name="surname" id="surname" required />
+
+        <label for="email">Email Adresiniz:</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="birthdate">Doğum Tarihiniz:</label>
+        <input type="date" name="birthdate" id="date" required />
+
+        <label for="tel">Telefon Numaranız:</label>
+        <input type="tel" maxlength="10" name="tel" id="tel" required />
+
+        <label for="password">Şifre:</label>
+        <input type="password" name="password" id="password" required />
+
+        <label for="confirmpassword">Şifrenizi Onaylayın:</label>
+        <input
+          type="password"
+          name="confirmpassword"
+          id="confirmpassword"
+          required
+          disabled
+        />
+
+        <button type="submit">Giriş Yap</button>
+      </form>
+      <p>Hesabınız var mı? <a href="/login.html">Giriş Yap</a></p>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const passwordField = document.getElementById("password");
+      const confirmPasswordField = document.getElementById("confirmpassword");
+
+      confirmPasswordField.disabled = true;
+
+      passwordField.addEventListener("input", function () {
+        if (passwordField.value !== "") {
+          confirmPasswordField.disabled = false;
+        } else {
+          confirmPasswordField.disabled = true;
+          confirmPasswordField.value = "";
+        }
+      });
+    });
+  </script>
+</html>
