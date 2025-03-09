@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Laptop",
+        "price": 1200.50,
+        "link": "https://example.com/laptop"
+    },
+    {
+        "name": "Telefon",
+        "price": 799.99,
+        "link": "https://example.com/smartphone"
+    },
+    {
+        "name": "Tablet",
+        "price": 450.00,
+        "link": "https://example.com/tablet"
+    }
+]

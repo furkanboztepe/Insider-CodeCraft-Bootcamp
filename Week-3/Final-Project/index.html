@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <script>
+      $(document).ready(() => {
+        $("head").append(`
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
+                .productList {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 5rem;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    padding: 20px;
+                }
+                .product {
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    width: 200px;
+                    text-align: center;
+                    transition: transform 0.3s, box-shadow 0.3s;
+                    cursor: pointer;
+                }
+                .product a {
+                    text-decoration: none;
+                    color: #007bff;
+                }
+                .product a:hover {
+                    text-decoration: underline;
+                }
+                .product:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                }
+                .overlay {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 999;
+                }
+                .popup {
+                    display: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: white;
+                    padding: 20px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
+                    max-width: 400px;
+                    width: 100%;
+                    text-align: center;
+                }
+                .popup button {
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+                .popup button:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+        `);
+
+        var container = $("<div>").addClass("container").appendTo("body");
+        var productListesi = $("<div>")
+          .addClass("productList")
+          .appendTo(container);
+        var overlay = $("<div>").addClass("overlay").appendTo(container);
+        var popup = $("<div>").addClass("popup").appendTo(container);
+
+        $.ajax({
+          url: "products.json",
+          method: "GET",
+          dataType: "json",
+          success: (data) => {
+            $.each(data, (index, product) => {
+              var productDiv = $("<div>")
+                .addClass("product")
+                .html(
+                  `<h3>${product.productName}</h3>
+                         <p>${product.productPrice}</p>
+                         <a href="${product.productURL}" target="_blank">Ürün Linki</a>`
+                );
+              productDiv.click(() => {
+                overlay.fadeIn();
+                popup
+                  .html(
+                    `<h3>${product.productName}</h3>
+                             <p>${product.productDescription}</p>
+                             <button class="close-button">Kapat</button>`
+                  )
+                  .fadeIn();
+              });
+              productListesi.append(productDiv);
+            });
+          },
+          error(status, error) {
+            console.error("Veri Çekme Hatası:", status, error);
+          },
+        });
+        $(document).on("click", ".close-button", () => {
+          overlay.fadeOut();
+          popup.fadeOut();
+        });
+      });
+    </script>
+  </body>
+</html>

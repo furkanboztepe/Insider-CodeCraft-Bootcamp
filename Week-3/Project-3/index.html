@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İş Başvuru Formu</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <style>
+      .button-div{
+        justify-content: center;
+        display: flex;
+      }
+      .button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      #applicationForm {
+        display: none;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      .success-message {
+        display: none;
+        color: green;
+        margin-top: 20px;
+        text-align: center;
+      }
+      label.error {
+        color: red;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-top: 5px;
+      }
+      input.error {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-div"><button id="applyButton" class="button">Başvuru Yap</button></div>
+
+    <form id="applicationForm">
+      <label for="firstName">Ad:</label>
+      <input type="text" id="firstName" name="firstName" required /><br /><br />
+
+      <label for="lastName">Soyad:</label>
+      <input type="text" id="lastName" name="lastName" required /><br /><br />
+
+      <label for="email">E-posta:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="phone">Telefon Numarası:</label>
+      <input type="text" id="phone" name="phone" required /><br /><br />
+
+      <label for="position">Pozisyon:</label>
+      <input type="text" id="position" name="position" required /><br /><br />
+
+      <label for="datepicker">Başvuru Tarihi:</label> <br /> <br />
+      <input type="text" id="datepicker" name="datepicker" /><br /><br />
+      <button type="submit" class="button">Gönder</button>
+    </form>
+    <div class="success-message">Başvurunuz başarıyla gönderildi!</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("#applyButton").click(() => {
+          $("#applicationForm").fadeIn();
+          $("#applyButton").hide();
+        });
+        $("#applicationForm").validate({
+          rules: {
+            firstName: "required",
+            lastName: "required",
+            email: {
+              required: true,
+              email: true,
+            },
+            phone: "required",
+            position: "required",
+          },
+          messages: {
+            firstName: "Lütfen adınızı girin.",
+            lastName: "Lütfen soyadınızı girin.",
+            email: {
+              required: "Lütfen e-posta adresinizi girin.",
+              email: "Lütfen geçerli bir e-posta adresi girin.",
+            },
+            phone: {
+              required: "Lütfen telefon numaranızı girin.",
+            },
+            position: "Lütfen pozisyon bilgisini girin.",
+            datepicker: "Lütfen başvuru tarihini seçin.",
+          },
+          errorPlacement: (error, element) => {
+            error.insertBefore(element);
+          },
+          submitHandler: (form) => {
+            $(".success-message").fadeIn();
+            setTimeout(() => {
+              $(".success-message").fadeOut();
+            }, 3000);
+            form.reset();
+            $("#applicationForm").fadeOut();
+          },
+        });
+        $("#phone").mask("(999) 999-9999");
+        $("#datepicker").datepicker({
+          dateFormat: "dd.mm.yy",
+        });
+      });
+    </script>
+  </body>
+</html>

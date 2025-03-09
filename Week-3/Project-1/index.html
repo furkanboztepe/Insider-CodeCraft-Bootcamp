@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>JQuery Tasks List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Görev Listesi</h1>
+      <input type="text" id="taskInput" placeholder="Yeni görev ekle..." />
+      <button id="addTaskBtn">Görev Ekle</button>
+      <ul id="taskList"></ul>
+    </div>
+  </body>
+  <script>
+    $(document).ready(() => {
+      $("#addTaskBtn").click(() => {
+        const taskText = $("#taskInput").val().trim();
+        if (taskText !== "") {
+          const newTask = $("<li></li>").text(taskText);
+          const deleteBtn = $("<button></button>")
+            .text("Sil")
+            .addClass("deleteBtn");
+          newTask.append(deleteBtn);
+          $("#taskList").append(newTask);
+          $("#taskInput").val("");
+        }
+      });
+      $("#taskList").on("click", ".deleteBtn", function () {
+        $(this).parent().remove();
+      });
+
+      $("#taskList").on("click", "li", () => {
+        $(this).toggleClass("completed");
+      });
+    });
+  </script>
+</html>

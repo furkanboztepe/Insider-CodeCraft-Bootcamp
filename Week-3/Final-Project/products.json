@@ -1,0 +1,23 @@
+[
+  {
+    "productID": 1,
+    "productName": "Tablet",
+    "productPrice": "4.999,00 TL",
+    "productURL": "https://www.hepsiburada.com/samsung-galaxy-tab-a9-wi-fi-sm-x110-8gb-128gb-8-7-tablet-mystic-silver-p-HBCV00005LDS4D",
+    "productDescription": "Tablet ile alakalı ürün açıklaması burada yer alıyor."
+  },
+  {
+    "productID": 2,
+    "productName": "Laptop",
+    "productPrice": "14.999,00 TL",
+    "productURL": "https://www.hepsiburada.com/asus-vivobook-15-x1504za-nj870-intel-core-i5-1235u-8gb-512gb-ssd-freedos-15-6-tasinabilir-bilgisayar-pm-HBC00007689FU",
+    "productDescription": "Laptop ile alakalı ürün açıklaması burada yer alıyor."
+  },
+  {
+    "productID": 3,
+    "productName": "Telefon",
+    "productPrice": "13.889,00 TL",
+    "productURL": "https://www.hepsiburada.com/samsung-galaxy-a35-128-gb-8-gb-ram-samsung-turkiye-garantili-siyah-p-HBCV000062KQTO",
+    "productDescription": "Telefon ile alakalı ürün açıklaması burada yer alıyor."
+  }
+]
